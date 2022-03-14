@@ -1,3 +1,12 @@
+/**
+ * Spring Boot SubMission form for students.
+ * class name: SubMissionFormApplication
+ * description :Application class for SubMission form.
+ * @author GAYATHRY E
+ * @version jdk 8
+ *
+ */
+
 package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
