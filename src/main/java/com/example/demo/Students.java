@@ -1,3 +1,11 @@
+/**
+ * Spring Boot SubMission form for students.
+ * class name: Students
+ * description : Model class for SubMission form.
+ * @author GAYATHRY E
+ * @version jdk 8
+ *
+ */
 package com.example.demo;
 
 import javax.persistence.Entity;
