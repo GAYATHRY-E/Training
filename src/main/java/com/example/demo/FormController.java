@@ -1,14 +1,20 @@
+/**
+ * Spring Boot SubMission form for students.
+ * class name: FormController
+ * description : Controller class for SubMission form.
+ * @author GAYATHRY E
+ * @version jdk 8
+ *
+ */
+
 package com.example.demo;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,38 +26,51 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @Controller
 public class FormController {
 	
 	@Autowired
-	StudentRepo repo;
+	StudentRepo repo;  
+	//method level comments
+	/**
+	 * @return student
+	 */
 	@RequestMapping("/")
 	public String details()
 	{
-	log.info("details method started");	
+	log.debug("details method started");	//use debug
 	return "student";
 	
 	}
-	
+
+	/**
+	 * @param students
+	 * @return student
+	 */
 	@RequestMapping("/details")
 	public String details(Students students)
 	{
 	log.info("details method started with passing parameter students{}",students);		
     repo.save(students);
-    log.info("details method ended");
+    log.debug("details method ended");
 	return "student";
 	}
 	
+	/**
+	 * @return ViewStudents
+	 */
 	@RequestMapping("/getdetails")
 	public String getdetails()
 	{
-	log.info("getDetails method started");	
-	log.info("getDetails method ended");
+	log.debug("getDetails method started");	
+	log.debug("getDetails method ended");
     return "ViewStudents";
 	}	
-	
+/**
+ * @param sid
+ * @return mv
+ */
 @PostMapping("/getdetails")
 public ModelAndView getdetails(@RequestParam int sid) 
 {
@@ -62,51 +81,68 @@ public ModelAndView getdetails(@RequestParam int sid)
     log.info("getDetails by id method ended");
     return mv;
 } 
+
+/**
+ * @return repo.findAll
+ */
 @RequestMapping("/students")
 @ResponseBody
 public List<Students> getStudents()
 {
-	log.info("getStudents method started");	
-	log.info("getStudents method ended");
+	log.debug("getStudents method started");	
+	log.debug("getStudents method ended");
 	return repo.findAll();
 }
-
+/**
+ * @param sid
+ * @return repo.findById
+ */
 @RequestMapping("/students/{sid}")
 @ResponseBody
 public Optional<Students> getStudentById(@PathVariable("sid") int sid)
 {
 
-	log.info("getStudentById method started by passing pathvariable{}",sid);	
-	log.info("getStudentById method ended");
+	log.debug("getStudentById method started by passing pathvariable{}",sid);	
+	log.debug("getStudentById method ended");
 	return repo.findById(sid);
 }
-
+/**
+ * @param students
+ * @return students
+ */
 @PostMapping("/students")
 public Students saveStudents(@RequestBody Students students)
 {
 	log.info("saveStudents method started with passing parameter students{}",students);
 	repo.save(students);
-	log.info("saveStudents method ended");
+	log.debug("saveStudents method ended");
 	return students;
 }
-
+/**
+ * @param sid
+ * @return std
+ */
 @DeleteMapping("/students/{sid}")
 public Students deleteStudents(@PathVariable("sid") int sid)
 {   
 	log.info("deleteStudents method started by passing pathvariable{}",sid);	
 	Students std=repo.getOne(sid);
 	repo.delete(std);
-	log.info("deleteStudents method ended");
+	log.debug("deleteStudents method ended");
 	return std;
 }
-
+/**
+ * @param students
+ * @return students
+ */
 @PutMapping(path="/students", consumes= {"application/json"})
 public Students updateStudents(@RequestBody Students students)
 {   
 	log.info("updateStudents method started with passing parameter students{}",students);
 	repo.save(students);
-	log.info("updateStudents method ended");
+	log.debug("updateStudents method ended");
 	return students;
 }
 
 }
+
